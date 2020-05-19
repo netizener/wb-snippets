@@ -1,2 +1,3 @@
 # wb-snippets
-Some code snippets that I use during web development
+Code snippets to bootstrap your projects during development time.
+Also, contains some resource guides to ease development while coding 
