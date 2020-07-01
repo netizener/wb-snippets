@@ -5,6 +5,7 @@ var express = require("express"),
      User = require("./models/user"),
      LocalStrategy = require("passport-local"),
      passportLocalMongoose = require("passport-local-mongoose");
+const { Passport } = require("passport");
 
 
 mongoose.connect("mongodb://localhost/auth_demo_app",{useNewUrlParser:true, useUnifiedTopology:true});
@@ -21,6 +22,7 @@ app.use(require("express-session")({
 app.use(passport.initialize());
 app.use(passport.session());
 
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
@@ -36,15 +38,15 @@ app.get('/secret',function(req,res){
 });
 
 //=======
-//AUTH ROUTES
+// AUTH ROUTES
 //=======
 
-//show sign up form
+// show sign up form
 app.get("/register",function(req,res){
     res.render("register");
 });
 
-//handling user sign up
+// handling user sign up
 app.post("/register",function(req,res){
     User.register(new User({username:req.body.username}),req.body.password,function(err,user){
         if(err){
@@ -57,7 +59,19 @@ app.post("/register",function(req,res){
     });
 });
 
+// LOGIN ROUTES
+// RENDER LOGIN FORM
+app.get("/login",function(req,res){
+    res.render("login");
+});
 
+// LOGIN LOGIC
+app.post("/login",passport.authenticate("local",{
+    successRedirect : "/secret",
+    failureRedirect: "/login"
+}),function(req,res){
+
+});
 //======
 app.listen(process.env.PORT || 5000, function(){
     console.log("server has started");
