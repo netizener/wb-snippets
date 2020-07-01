@@ -14,16 +14,17 @@ node app.js
 * Go to `localhost:5000` in your browser and have fun!
 
 ## Built with >
-* Node.js
-* MongoDb
+* Node.js : [Download](https://nodejs.org/en/download/)
+* MongoDb : [Download](https://www.mongodb.com/try/download/community)
 
 ## Resources to further learn from > 
-* Randall Degges - Everything You Ever Wanted to Know About Web Authentication in Node : https://youtu.be/i7of02icPyQ (🚨 He swears a lot! But its a great resource)
-* PassportJS Docs : http://www.passportjs.org/docs/authenticate/
-* A good StackOverflow thread that explains HASH and SALT : https://stackoverflow.com/questions/17201450/salt-and-hash-password-in-nodejs-w-crypto
+* [Randall Degges - Everything You Ever Wanted to Know About Web Authentication in Node](https://youtu.be/i7of02icPyQ) (🚨 He swears a lot! But its a great resource)
+* [PassportJS Authentication Docs](http://www.passportjs.org/docs/authenticate/)
+* [A good StackOverflow thread that explains HASH and SALT](https://stackoverflow.com/questions/17201450/salt-and-hash-password-in-nodejs-w-crypto)
 
-** The password is NOT stored in the database. Never store plaintext passwords in the database! **
-An example of a sample user generated in the database from this application is as followed :
+**The password is NOT stored in the database. Never store plaintext passwords in the database!**
+
+An example of a sample user generated in the database from this application is as followed. Notice that password isn't stored, but instead a hash and its salt (to decrypt it) is stored:
 ```javascript
 {
   "_id": "5efcff7f9f209b171c1f890d",
