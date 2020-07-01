@@ -5,8 +5,6 @@ var express = require("express"),
      User = require("./models/user"),
      LocalStrategy = require("passport-local"),
      passportLocalMongoose = require("passport-local-mongoose");
-const { Passport } = require("passport");
-
 
 mongoose.connect("mongodb://localhost/auth_demo_app",{useNewUrlParser:true, useUnifiedTopology:true});
 
@@ -33,7 +31,7 @@ app.get('/', function(req, res){
     res.render('home');
 });
 
-app.get('/secret',function(req,res){
+app.get('/secret',isLoggedIn,function(req,res){
     res.render("secret");
 });
 
@@ -70,9 +68,21 @@ app.post("/login",passport.authenticate("local",{
     successRedirect : "/secret",
     failureRedirect: "/login"
 }),function(req,res){
-
 });
+
+app.get("/logout", function(req,res){
+    req.logout();
+    res.redirect("/");
+});
+
+function isLoggedIn(req,res,next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/login");
+}
 //======
-app.listen(process.env.PORT || 5000, function(){
-    console.log("server has started");
+var port = process.env.PORT || 5000;
+app.listen(port, function(){
+    console.log("server has started on port " + port);
 });
