@@ -1,0 +1,14 @@
+{
+	"version": 3,
+	"file": "styles.css",
+	"sources": [
+		"styles.scss",
+		"_sass/main.scss"
+	],
+	"sourcesContent": [
+		"@import \"main\"; // tells SASS to look for file called `main.css` in _sass directory (in root folder of website)\n",
+		".current {\n\tcolor : green;\n}\n"
+	],
+	"names": [],
+	"mappings": "ACAA,AAAA,QAAQ,CAAC,EACR,KAAK,EAAG,KAAK,GACb"
+}
